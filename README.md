@@ -49,19 +49,19 @@ Since WhatsApp does not seem to offer Public APIs (As far as I know it only offe
   > * **sikulix/input_data.csv** (Replace with your data for greetings and WhatsApp Ids/Grps)
   > * **%MULE_HOME%\conf\wrapper.conf**  (Add the following at the end of the file & supply values for <..> properties)
  
-    wrapper.java.additional.994="-Dhttp.host=<http.host>"
+    wrapper.java.additional.994="-Dhttp.host=<http.host>" Example: localhost
     wrapper.java.additional.994.stripquotes=TRUE
-    wrapper.java.additional.995="-Dhttp.port=<http.port>"
+    wrapper.java.additional.995="-Dhttp.port=<http.port>" Example: 8081
     wrapper.java.additional.995.stripquotes=TRUE
-    wrapper.java.additional.996="-Dsmtp.host=<smtp.host>"
+    wrapper.java.additional.996="-Dsmtp.host=<smtp.host>" Example: smtp.gmail.com
     wrapper.java.additional.996.stripquotes=TRUE
-    wrapper.java.additional.997="-Dsmtp.port=<smtp.host>"
+    wrapper.java.additional.997="-Dsmtp.port=<smtp.port>" Example: 587
     wrapper.java.additional.997.stripquotes=TRUE
-    wrapper.java.additional.998="-Dsmtp.user=<smtp.user>"
+    wrapper.java.additional.998="-Dsmtp.user=<smtp.user>" Example: your gmail ID
     wrapper.java.additional.998.stripquotes=TRUE
-    wrapper.java.additional.999="-Dsmtp.password=<smtp.password>"
+    wrapper.java.additional.999="-Dsmtp.password=<smtp.password>" Example: your application password (not your account password)
     wrapper.java.additional.999.stripquotes=TRUE
-    wrapper.java.additional.1000="-Dsmtp.toEmail=<smtp.toEmail>"
+    wrapper.java.additional.1000="-Dsmtp.toEmail=<smtp.toEmail>" Example: Recipient email
     wrapper.java.additional.1000.stripquotes=TRUE
 
 8) In case you need to look at SikuliX Jython script on your machine using SikuliX IDE and/or make code changes: <br> **How to open sikulix/Start-Mule-And-Trigger-API.sikuli/Start-Mule-And-Trigger-API.py on your computer**:
@@ -83,4 +83,4 @@ Since WhatsApp does not seem to offer Public APIs (As far as I know it only offe
   > * **mvn clean package -DskipTests**
   > * This should prepare Mule deployable jar file in **mule-hackathon-2020\whatsapp-automation\target** folder.<br> Copy the jar to apps folder in Mule runtime i.e., **%MULE_HOME%/apps** folder
   
-**Additional README document with useful information**: https://github.com/srkomma/mule-hackathon-2020/blob/master/Mule-Hackathon-2020-WhatsApp-Automation-Additional-README.docx
+**Additional README document with useful information**: https://github.com/srkomma/mule-hackathon-2020/blob/master/Additional-README.docx
