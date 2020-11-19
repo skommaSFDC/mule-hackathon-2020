@@ -1,0 +1,1 @@
+start "Run Mule and Trigger API" cmd /t:07 /c "echo hello & java -jar %SIKULIX_HOME%\sikulixide.jar -f %SIKULIX_HOME%\sikuli.log -r %SIKULIX_HOME%\Start-Mule-And-Trigger-API.sikuli\Start-Mule-And-Trigger-API.py --args mule.bat %SIKULIX_HOME%\sikuli_images %SIKULIX_HOME%\curlPostInput.json <http.host for Mule APIs> <http.port for Mule APIs>" 

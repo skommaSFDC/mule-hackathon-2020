@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:email="http://www.mulesoft.org/schema/mule/email" xmlns:java="http://www.mulesoft.org/schema/mule/java"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/java http://www.mulesoft.org/schema/mule/java/current/mule-java.xsd
+http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a1454898-01d7-45c9-a22b-d5fc4109e7aa" >
+		<http:listener-connection host="${http.host}" port="${http.port}" />
+	</http:listener-config>
+	<file:config name="File_Config_SikulixHome" doc:name="File Config" doc:id="fab599f9-c6fd-4ead-94cb-1bee492dfafe" >
+		<file:connection workingDir="#[vars.sikulixHomeFolder]"/>
+	</file:config>
+	<email:smtp-config name="Email_SMTP" doc:name="Email SMTP" doc:id="930550a7-3aed-4c7f-800f-217dda420ed9" >
+		<email:smtp-connection host="${smtp.host}" port="${smtp.port}" user="${smtp.user}" password="${smtp.password}" >
+			<email:properties >
+				<email:property key="mail.smtp.starttls.enable" value="true" />
+			</email:properties>
+		</email:smtp-connection>
+	</email:smtp-config>
+	<global-property doc:name="Global Property" doc:id="8b50d25d-fb97-446b-bc65-8abd387526a1" name="env" value="dev" />
+	<configuration-properties doc:name="Configuration properties" doc:id="b665ef07-074e-4b4a-9f82-accdf1c1ff1e" file="${env}-properties.yaml" />
+	<flow name="whatsapp-automationFlow" doc:id="2f9d8039-4ddf-4b5b-bff7-abf6de2cf7d8">
+		<http:listener doc:name="AutomationTrigger Endpoint" doc:id="238a5835-2dee-4eb6-a8ca-fdd95ac9ba3f" config-ref="HTTP_Listener_config" path="/whatsapp" allowedMethods="POST"/>
+		<flow-ref doc:name="Save Key Data in Vars" doc:id="abcef0ec-dce5-4e59-bd4f-a6e18a9a3ca6" name="save-key-data-in-vars-Sub_Flow"/>
+		<flow-ref doc:name="Read CSV file" doc:id="4d620246-c868-42ce-a74a-ed69b9ebbeab" name="read-csv-data-Sub_Flow"/>
+		<ee:transform doc:name="Filter Data for processing" doc:id="e62cc074-64ad-41ea-b482-e9dabbeed450">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+var d_mon = now() as String {format: "d-MMM"}
+---
+{ input_data : payload filter 
+	($.Date == d_mon 
+		and ($.SendMsg == "Y" or $.SendImage == "Y")
+	)
+} 
+	
+++
+	
+{
+	"sikuli_home_folder" : vars.sikulixHomeFolder,
+	"sikuli_images_sub_folder" : vars.sikulixImagesSubFolder,
+	"system_default_pictures_folder" : vars.systemDefaultPicturesFolder,
+	"whatsapp_desktop_exe_path" : vars.whatsAppExePath,
+	"run_date" : vars.runDate
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<java:invoke-static doc:name="Invoke static - Java Sikuli to perform WhatsApp update" doc:id="b6666bb6-6e67-499d-b5b0-9245924de1b2" class="com.dev.whatsapp.WhatsAppAutomationViaSikuliJava" method="updateProfilePictureAndSendGreeting(java.lang.String)">
+			<java:args ><![CDATA[#[arg0 : payload]]]></java:args>
+		</java:invoke-static>
+		<flow-ref doc:name="Read, Email, and Delete Log file" doc:id="71252ac6-5124-4258-b3e2-b5598f6e4424" name="log-file-processing-Sub_Flow"/>
+		<flow-ref doc:name="Write Process completion file and Log completion" doc:id="4c9eb924-4d25-4d4b-aaae-30d1cf11627c" name="process-completion-Sub_Flow"/>
+	</flow>
+	<sub-flow name="save-key-data-in-vars-Sub_Flow" doc:id="532c711b-7c4f-416a-96bd-9916397617d8">
+		<ee:transform doc:name="Save Key Data in Vars" doc:id="94fa3559-0c3e-4e23-b1c8-c6187d5ea955">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+			<ee:variables>
+				<ee:set-variable variableName="systemDefaultPicturesFolder"><![CDATA[%dw 2.0
+output application/json
+---
+payload.system_default_pictures_folder]]></ee:set-variable>
+				<ee:set-variable variableName="whatsAppExePath"><![CDATA[%dw 2.0
+output application/json
+---
+payload.whatsapp_desktop_exe_path]]></ee:set-variable>
+				<ee:set-variable variableName="runDate"><![CDATA[%dw 2.0
+output application/json
+---
+now() as String {format: "yyyyMMdd"}]]></ee:set-variable>
+				<ee:set-variable variableName="sikulixHomeFolder" ><![CDATA[%dw 2.0
+output application/json
+---
+payload.sikuli_home_folder]]></ee:set-variable>
+				<ee:set-variable variableName="sikulixImagesSubFolder" ><![CDATA[%dw 2.0
+output application/json
+---
+payload.sikuli_images_sub_folder]]></ee:set-variable>
+				<ee:set-variable variableName="processDoneFlagFile" ><![CDATA[%dw 2.0
+output application/json
+---
+payload.process_done_flag_file]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+	</sub-flow>
+	<sub-flow name="read-csv-data-Sub_Flow" doc:id="be359d78-31d2-407f-a82e-b9356f119f0c">
+		<file:read doc:name="Read Greetings Data - CSV file" doc:id="ef44d30b-951c-45a6-86f3-c105e31942ca" config-ref="File_Config_SikulixHome" path='#[payload.input_csv_file_name]' />
+	</sub-flow>
+	<sub-flow name="log-file-processing-Sub_Flow" doc:id="64841e50-696e-446c-a2d1-0774db102897">
+		<file:read doc:name="Read Log file" doc:id="228fed0a-5373-4d9f-b8f4-2bd9405ff8e6" config-ref="File_Config_SikulixHome" path='#[vars.runDate as String ++ ".txt"]' />
+		<email:send doc:name="Email Log File" doc:id="c98cb0a3-c5fd-4ca3-8dc8-a6e5397af09b" config-ref="Email_SMTP" subject='#[vars.runDate ++ ".txt"]'>
+			<email:to-addresses>
+				<email:to-address value="${smtp.toEmail}" />
+			</email:to-addresses>
+		</email:send>
+		<file:delete doc:name="Delete Log File" doc:id="533cb6f3-847e-40c3-b662-620c286bb6f9" config-ref="File_Config_SikulixHome" path='#[vars.runDate as String ++ ".txt"]' />
+	</sub-flow>
+	<sub-flow name="process-completion-Sub_Flow" doc:id="b83ee14b-f15d-4e29-9257-f272d365f0ca" >
+		<file:write doc:name="Write Process Completion File" doc:id="66dae423-7c42-4811-b4a9-10f72e8e60fe" config-ref="File_Config_SikulixHome" path="#[vars.processDoneFlagFile]" />
+		<logger level="INFO" doc:name="Logger" doc:id="eaa40a08-eecf-49af-8f88-09f5b1ac9735" message="___DONE___"/>
+	</sub-flow>
+	<flow name="mule-whatsapp-flow-health-check" doc:id="a06edc30-26b8-4e80-80fc-8a9f723a4eff" >
+		<http:listener doc:name="HealthCheck Endpoint" doc:id="fe49e015-e5f0-442a-9e6d-a4c027471c9d" config-ref="HTTP_Listener_config" path="/whatsapp/healthcheck" outputMimeType="text/html" allowedMethods="GET"/>
+		<logger level="INFO" doc:name="Logger" doc:id="ceab681e-8927-4bf4-b10b-de8162a407ad" message="____MULE IS UP____"/>
+	</flow>
+</mule>

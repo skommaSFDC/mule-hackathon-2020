@@ -1,0 +1,8 @@
+{
+	"sikuli_home_folder" : "C:\\sikulix",
+	"sikuli_images_sub_folder": "sikuli_images",
+	"system_default_pictures_folder": "<Your pictures folder>",
+	"whatsapp_desktop_exe_path": "<WhatsApp Desktop Exe path>",
+	"input_csv_file_name" : "input_data.csv",
+	"process_done_flag_file": "whatsapp_update_done.txt"
+}

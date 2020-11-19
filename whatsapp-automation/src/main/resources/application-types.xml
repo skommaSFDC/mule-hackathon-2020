@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="automation-trigger-json-input" format="json">
+      <types:shape format="weave" example="examples/input-sample-1.json"><![CDATA[%dw 2.0
+
+type automation_trigger_json_input = {|
+  sikuli_home_folder: String, 
+  sikuli_images_sub_folder: String, 
+  system_default_pictures_folder: String, 
+  whatsapp_desktop_exe_path: String, 
+  input_csv_file_name: String, 
+  process_done_flag_file: String
+|} {"example": "{\\\"sikuli_home_folder\\\":\\\"C:\\\\\\\\sikulix\\\",\\\"sikuli_images_sub_folder\\\":\\\"sikuli_images\\\",\\\"system_default_pictures_folder\\\":\\\"C:\\\\\\\\Users\\\\\\\\srk\\\\\\\\Pictures\\\",\\\"whatsapp_desktop_exe_path\\\":\\\"C:\\\\\\\\Users\\\\\\\\srk\\\\\\\\AppData\\\\\\\\Local\\\\\\\\WhatsApp\\\\\\\\WhatsApp.exe\\\",\\\"input_csv_file_name\\\":\\\"input_data.csv\\\",\\\"process_done_flag_file\\\":\\\"whatsapp_update_done.txt\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="greetings-data-csv-input" format="csv">
+      <types:shape format="weave" example="examples/input-csv-sample.csv"><![CDATA[%dw 2.0
+
+type greetings_data_csv_input = Array<{|  Date: String,   To: String,   Occasion: String,   Message: String,   SendMsg: String,   SendImage: String,   WhatsAppUniqueDestinations: String|}> {"isQuotedString": "false",
+"header": "true",
+"headerLineNumber": "0"}
+
+]]></types:shape>
+      <types:properties>
+        <types:property name="headerLineNumber" value="0"/>
+        <types:property name="header" value="true"/>
+        <types:property name="isQuotedString" value="false"/>
+      </types:properties>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#2f9d8039-4ddf-4b5b-bff7-abf6de2cf7d8">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="automation-trigger-json-input"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#94fa3559-0c3e-4e23-b1c8-c6187d5ea955">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="automation-trigger-json-input"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#e62cc074-64ad-41ea-b482-e9dabbeed450">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="greetings-data-csv-input"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>

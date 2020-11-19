@@ -1,0 +1,9 @@
+http:
+  host: "<http.host for Mule APIs>"
+  port: "<http.port for Mule APIs>"
+smtp:
+  host: "<smtp.host>"
+  port: "<smtp.port>"
+  user: "<your email address>"
+  password: "<Application Password - Generate in GMAIL account settings>"
+  toEmail: "<Recipient EMAIL Address>"
