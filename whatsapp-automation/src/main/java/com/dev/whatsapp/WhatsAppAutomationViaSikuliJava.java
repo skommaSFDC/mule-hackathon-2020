@@ -19,10 +19,8 @@ import org.json.JSONObject;
 public class WhatsAppAutomationViaSikuliJava {
 	public static final String SIKULI_HOME_FOLDER_FIELD = "sikuli_home_folder";
 	public static final String SIKULI_IMAGES_SUB_FOLDER_FIELD = "sikuli_images_sub_folder";
-	//public static final String CHROME_EXE = "chrome.exe";
-	//public static final String WHATSAPP_WEB_URL = "https://web.whatsapp.com";
 	public static final String PICTURES_FOLDER_FIELD = "system_default_pictures_folder";
-	public static final String WHATSAPP_DESKTOP_EXE_FIELD= "whatsapp_desktop_exe_path";
+	public static final String WHATSAPP_DESKTOP_EXE_FIELD= "whatsapp_desktop_exe";
 	public static final String RUN_DATE_FIELD= "run_date";
 	public static final String JSON_INPUT_DATA_FIELD= "input_data";
 	
@@ -34,7 +32,7 @@ public class WhatsAppAutomationViaSikuliJava {
 	public static final String PROFILE_DP_UPDATED_MARKER_FILE= "dpUpdated.txt";
 	public static final String PROFILE_DP_UPDATED_MARKER_FILE_DEFAULT= "dpUpdatedSelf.txt";
 	public static final String ARCHIVE_FOLDER_FOR_PICS= "archive";
-	public static final int NO_OF_EMOJIS= 6;	
+	public static final int NO_OF_EMOJIS= 5;	
 	
 	//Images used
 	public static final String NEW_BROWSER_TAB = "NewTabIcon.PNG";
@@ -80,7 +78,7 @@ public class WhatsAppAutomationViaSikuliJava {
 	static String sikulixImagesSubFolderPath = null;
 	static String systemDefaultPicturesFolderPath = null;
 	static String picturesFolderPathForRunDate = null;
-	static String whatsappDesktopExePath = null;
+	static String whatsappDesktopExe = null;
 	static String runDate = null;
 	static JSONArray inputDataJsonArray = null;
 	static FileWriter myWriter = null;
@@ -96,7 +94,7 @@ public class WhatsAppAutomationViaSikuliJava {
 			sikulixHomeFolderPath = inputObj.getString(SIKULI_HOME_FOLDER_FIELD);
 			sikulixImagesSubFolderPath = inputObj.getString(SIKULI_IMAGES_SUB_FOLDER_FIELD);
 			systemDefaultPicturesFolderPath = inputObj.getString(PICTURES_FOLDER_FIELD);
-			whatsappDesktopExePath = inputObj.getString(WHATSAPP_DESKTOP_EXE_FIELD);
+			whatsappDesktopExe = inputObj.getString(WHATSAPP_DESKTOP_EXE_FIELD);
 			runDate = inputObj.getString(RUN_DATE_FIELD);
 			
 			myWriter = new FileWriter(sikulixHomeFolderPath + "\\" + runDate + TEXT_FILE_TYPE_SUFFIX);
@@ -130,9 +128,14 @@ public class WhatsAppAutomationViaSikuliJava {
 					writeLog("No profile picture to update");
 				}
 				
-				s.type(Key.TAB, Key.ALT);
-											
 				writeLog("WhatsApp update done");
+				
+				try {
+					click(WHATSAPP_MINIMIZE,3000);
+				} catch (FindFailed fe) {
+					s.type(Key.TAB, Key.ALT);
+				}
+				
 			} else {
 				writeLog("No Data To Process");
 			}
@@ -151,24 +154,9 @@ public class WhatsAppAutomationViaSikuliJava {
 		
 		s.type("r", Key.WIN);
 		s.wait(new Pattern(WIN_RUN_CMD_OPEN),2000);
-		s.type(whatsappDesktopExePath + Key.ENTER);
+		s.type("a", Key.CTRL);
+		s.type(whatsappDesktopExe + Key.ENTER);
 		
-		for (int retryIndex = 0; retryIndex < 10; retryIndex++) {
-			if ( s.exists(new Pattern(SEARCH_OR_START_NEW_CHAT),5000) == null) {
-				if (s.exists(new Pattern(WHATSAPP_OPEN_RETRY),5000) != null) {
-					s.click(new Pattern(WHATSAPP_OPEN_RETRY));
-				}
-			} else {
-				break;
-			}
-		}
-		
-		// Below code is for WhatsApp WEB
-		/*s.type(CHROME_EXE + Key.ENTER);
-		
-		click(NEW_BROWSER_TAB, 5000);
-
-		s.type(WHATSAPP_WEB_URL + Key.ENTER);*/
 	}
 	
 	private static String getImageFileName(String imageType, String picturesSubFolder) throws IOException {

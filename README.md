@@ -39,9 +39,10 @@ Since WhatsApp does not seem to offer Public APIs (As far as I know it only offe
   > * **M2_HOME**: Where your Maven is located (Path above bin folder)
   > * **MULE_HOME**: Where Mule ESB runtime is located. (Path above bin folder. Example: C:\mule-enterprise-standalone-4.3.0)
   > * **SIKULIX_HOME**: Where sikulix folder from this repo exists on your machine. C:\sikulix)
-
+  
 6) **Windows Path changes**:
-  > * Add %JAVA_HOME%\bin, %MULE_HOME%\bin, %M2_HOME%\bin to the path
+  > * Add %JAVA_HOME%\bin, %MULE_HOME%\bin, %M2_HOME%\bin, and folder having WhatsApp.exe <br> (for Example: %USERPROFILE%\AppData\Local\WhatsApp) to the path
+		Sikuli and Java code invoke WhatsApp.exe without the full path. That's why you need to add the folder to the path.
 
 7) **Files needing changes based on your system**:
   > * **sikulix/WindowsWakeup.bat** (Supply values for http.host, http.port, smtp.host, smtp.port, smtp.user, smtp.password, smtp.toEmail)
@@ -59,7 +60,7 @@ Since WhatsApp does not seem to offer Public APIs (As far as I know it only offe
     wrapper.java.additional.997.stripquotes=TRUE
     wrapper.java.additional.998="-Dsmtp.user=<smtp.user>" Example: your gmail ID
     wrapper.java.additional.998.stripquotes=TRUE
-    wrapper.java.additional.999="-Dsmtp.password=<smtp.password>" Example: your application password (not your account password)
+    wrapper.java.additional.999="-Dsmtp.password=<smtp.password>" Example: Application password. Please see step (9) for how to generate this.
     wrapper.java.additional.999.stripquotes=TRUE
     wrapper.java.additional.1000="-Dsmtp.toEmail=<smtp.toEmail>" Example: Recipient email
     wrapper.java.additional.1000.stripquotes=TRUE

@@ -8,10 +8,10 @@ type automation_trigger_json_input = {|
   sikuli_home_folder: String, 
   sikuli_images_sub_folder: String, 
   system_default_pictures_folder: String, 
-  whatsapp_desktop_exe_path: String, 
+  whatsapp_desktop_exe: String, 
   input_csv_file_name: String, 
   process_done_flag_file: String
-|} {"example": "{\\\"sikuli_home_folder\\\":\\\"C:\\\\\\\\sikulix\\\",\\\"sikuli_images_sub_folder\\\":\\\"sikuli_images\\\",\\\"system_default_pictures_folder\\\":\\\"C:\\\\\\\\Users\\\\\\\\srk\\\\\\\\Pictures\\\",\\\"whatsapp_desktop_exe_path\\\":\\\"C:\\\\\\\\Users\\\\\\\\srk\\\\\\\\AppData\\\\\\\\Local\\\\\\\\WhatsApp\\\\\\\\WhatsApp.exe\\\",\\\"input_csv_file_name\\\":\\\"input_data.csv\\\",\\\"process_done_flag_file\\\":\\\"whatsapp_update_done.txt\\\"}"}
+|} {"example": "{\\\"sikuli_home_folder\\\":\\\"C:\\\\\\\\sikulix\\\",\\\"sikuli_images_sub_folder\\\":\\\"sikuli_images\\\",\\\"system_default_pictures_folder\\\":\\\"C:\\\\\\\\Users\\\\\\\\srk\\\\\\\\Pictures\\\",\\\"whatsapp_desktop_exe\\\":\\\"WhatsApp.exe\\\",\\\"input_csv_file_name\\\":\\\"input_data.csv\\\",\\\"process_done_flag_file\\\":\\\"whatsapp_update_done.txt\\\"}"}
 
 ]]></types:shape>
     </types:type>

@@ -45,7 +45,7 @@ var d_mon = now() as String {format: "d-MMM"}
 	"sikuli_home_folder" : vars.sikulixHomeFolder,
 	"sikuli_images_sub_folder" : vars.sikulixImagesSubFolder,
 	"system_default_pictures_folder" : vars.systemDefaultPicturesFolder,
-	"whatsapp_desktop_exe_path" : vars.whatsAppExePath,
+	"whatsapp_desktop_exe" : vars.whatsAppExe,
 	"run_date" : vars.runDate
 }]]></ee:set-payload>
 			</ee:message>
@@ -69,10 +69,6 @@ payload]]></ee:set-payload>
 output application/json
 ---
 payload.system_default_pictures_folder]]></ee:set-variable>
-				<ee:set-variable variableName="whatsAppExePath"><![CDATA[%dw 2.0
-output application/json
----
-payload.whatsapp_desktop_exe_path]]></ee:set-variable>
 				<ee:set-variable variableName="runDate"><![CDATA[%dw 2.0
 output application/json
 ---
@@ -89,6 +85,10 @@ payload.sikuli_images_sub_folder]]></ee:set-variable>
 output application/json
 ---
 payload.process_done_flag_file]]></ee:set-variable>
+				<ee:set-variable variableName="whatsAppExe" ><![CDATA[%dw 2.0
+output application/json
+---
+payload.whatsapp_desktop_exe]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
 	</sub-flow>
