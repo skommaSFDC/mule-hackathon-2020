@@ -36,13 +36,15 @@ Since WhatsApp does not seem to offer Public APIs (As far as I know it only offe
 
 5) Define **Windows Environment Variables**:
   > * **JAVA_HOME**: Where your JDK 8 is located (Path above bin folder. Example: C:\Program Files\AdoptOpenJDK\jdk-8.0.222.10-hotspot)
-  > * **M2_HOME**: Where your Maven is located (Path above bin folder)
+  > * **MAVEN_HOME**: Where your Maven is located (Path above bin folder)
   > * **MULE_HOME**: Where Mule ESB runtime is located. (Path above bin folder. Example: C:\mule-enterprise-standalone-4.3.0)
   > * **SIKULIX_HOME**: Where sikulix folder from this repo exists on your machine. C:\sikulix)
   
-6) **Windows Path changes**:
-  > * Add %JAVA_HOME%\bin, %MULE_HOME%\bin, %M2_HOME%\bin, and folder having WhatsApp.exe <br> (for Example: %USERPROFILE%\AppData\Local\WhatsApp) to the path
-		Sikuli and Java code invoke WhatsApp.exe without the full path. That's why you need to add the folder to the path.
+6) **Windows Path changes - Add the following**:
+  > * **%JAVA_HOME%\bin**
+  > * **%MULE_HOME%\bin**
+  > * **%MAVEN_HOME%\bin**
+  > * **Folder having WhatsApp.exe** (for Example: %USERPROFILE%\AppData\Local\WhatsApp) to the path.<br> Sikuli and Java code invoke WhatsApp.exe without the full path. That's why you need to add the folder to the path.
 
 7) **Files needing changes based on your system**:
   > * **sikulix/WindowsWakeup.bat** (Supply values for http.host, http.port, smtp.host, smtp.port, smtp.user, smtp.password, smtp.toEmail)
