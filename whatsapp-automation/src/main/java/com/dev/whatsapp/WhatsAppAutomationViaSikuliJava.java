@@ -35,10 +35,9 @@ public class WhatsAppAutomationViaSikuliJava {
 	public static final int NO_OF_EMOJIS= 5;	
 	
 	//Images used
-	public static final String NEW_BROWSER_TAB = "NewTabIcon.PNG";
 	public static final String SEARCH_OR_START_NEW_CHAT = "SearchOrStartNewChat.PNG";
 	public static final String PROFILE_MENU = "menu.PNG";
-	public static final String PROFILE_MENU_1 = "menu_1.PNG";
+	public static final String PROFILE_MENU_1 = "menuVLT.PNG";
 	public static final String PROFILE_OPTION = "profile.PNG";
 	public static final String PROFILE_REGION = "ProfileRegion.PNG";	
 	public static final String CHANGE_PROGILE_PHOTO = "uploadPhoto.PNG";
@@ -48,10 +47,8 @@ public class WhatsAppAutomationViaSikuliJava {
 	public static final String UPLOAD_ACTION = "uploadAction.PNG";
 	public static final String UPLOAD_DONE_BACK_ACTION = "ProfileUpdateDoneBack.PNG";
 	public static final String TYPE_A_MESSAGE_LOC = "TypeAMsgOrAttchment.PNG";
-	public static final String EMOJI_ICON = "emojiIcon.PNG";
 	public static final String TEXT_MSG_SEND_ACTION = "MsgSendIcon.PNG";
 	public static final String WHATSAPP_MINIMIZE = "WhatsAppMinimize.PNG";
-	public static final String WHATSAPP_OPEN_RETRY = "RETRY.png";	
 	public static final String TEXT_MSG_SEND_ACTION_1 = "MsgSendIconAlternate.PNG";	
 	public static final String PROFILE_PIC_SET = "ProfilePhotoSet.PNG";		
 	public static final String WHATSAPP_ATTACH = "whatsAppAttach.PNG";
