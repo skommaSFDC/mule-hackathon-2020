@@ -8,7 +8,6 @@ apiHttpHost = sys.argv[4]
 apiHttpPort = sys.argv[5]
 darkTheme = False
 
-# Set images folder.
 setBundlePath(sikuliImagesFolder)
 
 # Turn off CAPS LOCK if on
@@ -47,7 +46,7 @@ for n in range(20):
     wait(5)
 
 if (darkTheme):
-    rDT = Region(Region(410,33,153,45))    
+    rDT = Region(Region(2,3,670,372))
     rDT.click("menuHDT.PNG")
     wait(1)
     click("settingsDT.PNG")
@@ -111,14 +110,14 @@ type("r", Key.WIN)
 wait(5)
 type("a", Key.CTRL)
 wait(2)
-
+# Add WhatsApp Exe path to the Windows user-defined or system path
 type("WhatsApp" + Key.ENTER)
 wait(2)
 #Switch back WhatsApp to original theme if switched above
 
 if (darkTheme):
-    rLT = Region(Region(368,36,202,40))    
-    rLT.click("menuHLT.PNG")
+    rLT = Region(Region(2,3,670,372))
+    rLT.click("menuHLT.PNG")   
     wait(1)
     click("settingsLT.PNG")
     wait(1)

@@ -4,6 +4,7 @@ import org.sikuli.script.FindFailed;
 import org.sikuli.script.ImagePath;
 import org.sikuli.script.Key;
 import org.sikuli.script.Pattern;
+import org.sikuli.script.Region;
 import org.sikuli.script.Screen;
 
 import java.io.File;
@@ -36,7 +37,7 @@ public class WhatsAppAutomationViaSikuliJava {
 	
 	//Images used
 	public static final String SEARCH_OR_START_NEW_CHAT = "SearchOrStartNewChat.PNG";
-	public static final String PROFILE_MENU = "menu.PNG";
+	public static final String PROFILE_MENU = "menuHLT.PNG";
 	public static final String PROFILE_MENU_1 = "menuVLT.PNG";
 	public static final String PROFILE_OPTION = "profile.PNG";
 	public static final String PROFILE_REGION = "ProfileRegion.PNG";	
@@ -309,7 +310,8 @@ public class WhatsAppAutomationViaSikuliJava {
 		 */
 
 		try {
-			s.click(new Pattern(PROFILE_MENU));
+			Region r = new Region(2,3,670,372);
+			r.click(new Pattern(PROFILE_MENU));
 		} catch (FindFailed ff) {
 			click(PROFILE_MENU_1, 22, -1);
 		}
