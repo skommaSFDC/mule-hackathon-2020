@@ -42,10 +42,11 @@ for n in range(20):
     elif exists("RetryDT.PNG"):
         click("RetryDT.PNG")
     else:
-        print ("No condition satisfied. Wait and retry")
+        print ("WhatsApp not ready yet. Wait and retry..")
     wait(5)
 
 if (darkTheme):
+    print ("Found Dark Theme. Switching to Light theme..")
     rDT = Region(Region(2,3,670,372))
     rDT.click("menuHDT.PNG")
     wait(1)
@@ -58,6 +59,9 @@ if (darkTheme):
     click("okDT.PNG")
     wait(1)
     click("backLT.PNG")
+    wait(2)
+else:
+    print ("Found Light Theme..")
     wait(2)
 
 #Minimize WhatsApp
@@ -116,6 +120,7 @@ wait(2)
 #Switch back WhatsApp to original theme if switched above
 
 if (darkTheme):
+    print ("Restoring Dark theme..")
     rLT = Region(Region(2,3,670,372))
     rLT.click("menuHLT.PNG")   
     wait(1)
@@ -129,7 +134,9 @@ if (darkTheme):
     wait(1)
     click("backDT.PNG")
     wait(2)
-
+else:
+    wait(2)
+    
 #Minimize WhatsApp
 if exists("WhatsAppMinimize.PNG"):
     click("WhatsAppMinimize.PNG")
