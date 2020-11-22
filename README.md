@@ -47,14 +47,14 @@ Since WhatsApp does not seem to offer Public APIs (As far as I know it only offe
   > * **Folder having WhatsApp.exe** (for Example: %USERPROFILE%\AppData\Local\WhatsApp) to the path.<br> Sikuli and Java code invoke WhatsApp.exe without the full path. That's why you need to add the folder to the path.
 
 7) **Files needing changes based on your system**:
-  > * **sikulix/WindowsWakeup.bat** (Supply values for http.host, http.port, smtp.host, smtp.port, smtp.user, smtp.password, smtp.toEmail)
-  > * **sikulix/curlPostInput.json** (Supply values for system_default_pictures_folder & whatsapp_desktop_exe_path)
+  > * **sikulix/WindowsWakeup.bat** (Supply values for http.host)
+  > * **sikulix/curlPostInput.json** (Supply values for system_default_pictures_folder & whatsapp_desktop_exe)
   > * **sikulix/input_data.csv** (Replace with your data for greetings and WhatsApp Ids/Grps)
   > * **%MULE_HOME%\conf\wrapper.conf**  (Add the following at the end of the file & supply values for <..> properties)
  
     wrapper.java.additional.994="-Dhttp.host=<http.host>" Example: localhost
     wrapper.java.additional.994.stripquotes=TRUE
-    wrapper.java.additional.995="-Dhttp.port=<http.port>" Example: 8081
+    wrapper.java.additional.995="-Dhttp.port=<http.port>" Example: 8081  If it is already used on your system, use a different one. <br>This should match with the http.host in WindowsWakeup.bat
     wrapper.java.additional.995.stripquotes=TRUE
     wrapper.java.additional.996="-Dsmtp.host=<smtp.host>" Example: smtp.gmail.com
     wrapper.java.additional.996.stripquotes=TRUE
