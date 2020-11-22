@@ -72,7 +72,7 @@ Since WhatsApp does not seem to offer Public APIs (As far as I know it only offe
   > * Then file --> open --> select **sikulix/Start-Mule-And-Trigger-API.sikuli/Start-Mule-And-Trigger-API.py** file
 
 9) Generate application password for Mule application using your EMAIL provider's instructions. In our case, we followed this link to do it from GMAIL.
-  > * **Link**: https://support.google.com/accounts/answer/185833?hl=en <br> Mule flow has code to email the log file. Please note, password is NOT your email account's password. You will have to generate for Mule Application using custom for application choice.
+  > * **Link**: https://support.google.com/accounts/answer/185833?hl=en <br> Mule flow has code to email the log file. Please note, password is NOT your email account's password. You will have to generate for Mule Application using custom for application choice. Please note that App Passwords can only be used with accounts that have 2-Step Verification turned on.
   
 10) **One time setup to get Windows Sleep and WakeUp working as expected**:
   > * Open **cmd as administrator** on Windows and run this command **powercfg -h off** (Turns off hibernation)
