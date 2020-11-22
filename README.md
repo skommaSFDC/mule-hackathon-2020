@@ -86,6 +86,8 @@ Since WhatsApp does not seem to offer Public APIs (As far as I know it only offe
   > * **mvn clean package -DskipTests**
   > * This should prepare Mule deployable jar file in **mule-hackathon-2020\whatsapp-automation\target** folder.<br> Copy the jar to apps folder in Mule runtime i.e., **%MULE_HOME%/apps** folder
   
+**Setup video**
+
   > * [![Setup](http://img.youtube.com/vi/TK-v-a2Phhc/0.jpg)](http://www.youtube.com/watch?v=TK-v-a2Phhc)
   
   
