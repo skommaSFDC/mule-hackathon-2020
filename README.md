@@ -88,12 +88,12 @@ Since WhatsApp does not seem to offer Public APIs (As far as I know it only offe
   
 **Setup video**
 
-  > * [![Setup](http://img.youtube.com/vi/TK-v-a2Phhc/0.jpg)](http://www.youtube.com/watch?v=TK-v-a2Phhc)
+[![Setup](http://img.youtube.com/vi/TK-v-a2Phhc/0.jpg)](http://www.youtube.com/watch?v=TK-v-a2Phhc)
   
   
 **Additional README document with useful information**: https://github.com/srkomma/mule-hackathon-2020/blob/master/Additional-README.docx
 
 **DEMO video**
 
-  > * [![Demo](http://img.youtube.com/vi/Zv620Y1FJ3s/0.jpg)](http://www.youtube.com/watch?v=Zv620Y1FJ3s)
+[![Demo](http://img.youtube.com/vi/Zv620Y1FJ3s/0.jpg)](http://www.youtube.com/watch?v=Zv620Y1FJ3s)
 
