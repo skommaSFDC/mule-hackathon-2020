@@ -1,0 +1,59 @@
+#%RAML 1.0
+types:
+  Automation-API-Input:
+    description: Automation API input
+    example:
+      strict: true
+      value:
+        sikuli_home_folder: "C:\\sikulix"
+        sikuli_images_sub_folder: sikuli_images
+        system_default_pictures_folder: "C:\\Users\\<username>\\Pictures"
+        whatsapp_desktop_exe: WhatsApp.exe
+        input_csv_file_name: input_data.csv
+        process_done_flag_file: whatsapp_update_done.txt
+    properties:
+      sikuli_home_folder:
+        type: string
+      sikuli_images_sub_folder:
+        description: Sub-folder in sikuli_home_folder having images needed by Mule Java code
+        type: string
+      system_default_pictures_folder:
+        description: Default pictures folder path on your machine
+        type: string
+      whatsapp_desktop_exe:
+        description: WhatsApp computer application name.
+        type: string
+      input_csv_file_name:
+        description: This is the file name of the CSV file containing the greetings data
+        type: string
+      process_done_flag_file:
+        description: Name of the file that Mule creates after all processing is done
+        type: string
+title: WhatsApp Automation
+baseUri: http://localhost:8081
+description: WhatsApp Automation API
+mediaType:
+  - application/json
+version: v1
+protocols:
+  - HTTP
+/whatsapp:
+  post:
+    displayName: Automation API
+    body:
+      type: Automation-API-Input
+    responses:
+      "200":
+        description: Success
+        body:
+          text/plain:
+            description: Success Response
+            example: "***** Run Date: 20201121 ***** No Data To Process"
+            type: string
+/whatsapp/healthcheck:
+  get:
+    displayName: HealthCheck API
+    description: External code invokes this API to ensure Mule application is up for further processing
+    responses:
+      "200":
+        description: Success Response
